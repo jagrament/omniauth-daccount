@@ -12,6 +12,7 @@ module OmniAuth
       #authorizeにリクエストフォワードする時のapp側のパラメータ値にこれらを含めること。
       option :authorize_options, %i[nounce redirect_uri]
       option :verify_iss, true
+      option :callback_path, '/login/docomo_callback'
 
       option :client_options, {#authorizationリクエスト時の追加パラメータ
              site: 'https://conf.uw.docomo.ne.jp',
