@@ -17,15 +17,14 @@ module OmniAuth
              site: 'https://conf.uw.docomo.ne.jp',
              authorize_url: 'https://id.smt.docomo.ne.jp/cgi8/oidc/authorize',
              token_url: 'https://conf.uw.docomo.ne.jp/token/o/oauth2/auth',
-             headers: {
-               'Content-Type' => 'application/x-www-form-urlencoded',
-               'Host' => full_host
-             }
            }
 
       def request_phase
-        p "#{client.options}"
-        redirect client.auth_code.authorize_url({:redirect_uri => callback_url}.merge(authorize_params))
+        options.client_options[:headers] = {
+          "Content-Type" => "application/x-www-form-urlencoded",
+          "Host" => full_host
+        }
+        super
       end
 
       def authorize_params
@@ -57,11 +56,10 @@ module OmniAuth
 
       def raw_info
         access_token.options[:mode] = :query
-        access_token.options[:headers] = {
-          'Authorization' =>  BASE_HOST,
+        access_token.options[:headers].merge({
           'Content-Type' => 'application/x-www-form-urlencoded',
           'Host' => full_host,
-        }
+        })
         @raw_info ||= access_token.get('userinfo').parsed
       end
 
