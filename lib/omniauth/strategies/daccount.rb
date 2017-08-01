@@ -8,25 +8,25 @@ module OmniAuth
   module Strategies
     class Daccount < OmniAuth::Strategies::OAuth2
       BASE_SCOPES = "openid"
-      BASE_HOST = "localhost:3000"
       option :name, 'daccount'
       #authorizeにリクエストフォワードする時のapp側のパラメータ値にこれらを含めること。
       option :authorize_options, %i[nounce redirect_uri]
       option :verify_iss, true
 
-      option :client_options, #authorizationリクエスト時の追加パラメータ
+      option :client_options, {#authorizationリクエスト時の追加パラメータ
              site: 'https://conf.uw.docomo.ne.jp',
              authorize_url: 'https://id.smt.docomo.ne.jp/cgi8/oidc/authorize',
-             token_url: 'https://conf.uw.docomo.ne.jp/token/o/oauth2/auth'
+             token_url: 'https://conf.uw.docomo.ne.jp/token/o/oauth2/auth',
+             headers: {
+               'Content-Type' => 'application/x-www-form-urlencoded',
+               'Host' => "localhost:3000"
+             }
+           }
 
       def request_phase
-        super
-      end
-
-      def request_phase
+        p "#{client.options}"
         redirect client.auth_code.authorize_url({:redirect_uri => callback_url}.merge(authorize_params))
       end
-
 
       def authorize_params
         super.tap do |params|
@@ -34,11 +34,6 @@ module OmniAuth
             params[k] = request.params[k.to_s] unless [nil, ''].include?(request.params[k.to_s])
           end
           params[:scope] = BASE_SCOPES
-          params[:headers] = {
-            'Authorization' =>  BASE_HOST,
-            'Content-Type' => 'application/x-www-form-urlencoded',
-            'Host' => full_host
-          }
           session['omniauth.state'] = params[:state] if params[:state]
         end
       end
@@ -68,6 +63,7 @@ module OmniAuth
         }
         @raw_info ||= access_token.get('userinfo').parsed
       end
+
     end
   end
 end
