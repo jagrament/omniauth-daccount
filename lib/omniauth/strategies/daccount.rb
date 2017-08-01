@@ -19,7 +19,7 @@ module OmniAuth
              token_url: 'https://conf.uw.docomo.ne.jp/token/o/oauth2/auth',
              headers: {
                'Content-Type' => 'application/x-www-form-urlencoded',
-               'Host' => "localhost:3000"
+               'Host' => full_host
              }
            }
 
@@ -39,14 +39,15 @@ module OmniAuth
       end
 
 
-      uid { "#{raw_info['sub'] + raw_info['iss']}" }
+      uid { raw_info['sub'] }
 
       info do
         prune!(
-         sub: raw_info['sub'],
-         iss: raw_info['iss'],
-         name: raw_info['name'],
-         picture: raw_info['picture'],
+          provider: "daccount",
+          sub: raw_info['sub'],
+          iss: raw_info['iss'],
+          name: raw_info['name'],
+          picture: raw_info['picture'],
         )
       end
 
