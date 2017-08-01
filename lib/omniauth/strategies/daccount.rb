@@ -34,6 +34,7 @@ module OmniAuth
             params[k] = request.params[k.to_s] unless [nil, ''].include?(request.params[k.to_s])
           end
           params[:scope] = BASE_SCOPES
+          params[:nounce] = params[:state]
           session['omniauth.state'] = params[:state] if params[:state]
         end
       end
