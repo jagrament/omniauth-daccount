@@ -18,9 +18,15 @@ module OmniAuth
              site: 'https://conf.uw.docomo.ne.jp',
              authorize_url: 'https://id.smt.docomo.ne.jp/cgi8/oidc/authorize',
              token_url: 'https://conf.uw.docomo.ne.jp/token/o/oauth2/auth'
+
       def request_phase
-       super
+        super
       end
+
+      def request_phase
+        redirect client.auth_code.authorize_url({:redirect_uri => callback_url}.merge(authorize_params))
+      end
+
 
       def authorize_params
         super.tap do |params|
@@ -28,7 +34,6 @@ module OmniAuth
             params[k] = request.params[k.to_s] unless [nil, ''].include?(request.params[k.to_s])
           end
           params[:scope] = BASE_SCOPES
-          params[:response_type] = 'code'
           params[:headers] = {
             'Authorization' =>  BASE_HOST,
             'Content-Type' => 'application/x-www-form-urlencoded',
