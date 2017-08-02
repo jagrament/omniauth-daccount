@@ -108,7 +108,7 @@ module OmniAuth
         base64str = "#{options.client_id}:#{options.client_secret}"
         params[:headers] = {
           "Host" => full_host,
-          "Authorization" => "Basic #{Base64.encode64(base64str)}",
+          "Authorization" => "Basic #{Base64.strict_encode64(base64str)}",
         }
         p "Params: #{params}"
         # {'grant_type' => 'authorization_code', 'code' => varifier}.merge(params)
