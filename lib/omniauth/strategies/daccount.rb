@@ -44,7 +44,7 @@ module OmniAuth
         options.token_options[:headers] = {
           "Content-Type" => "application/x-www-form-urlencoded",
           "Host" => full_host,
-          "Authorization" => Base64.encode64("#{@client.id}:#{@client.secret}")
+          "Authorization" => Base64.encode64("#{client.id}:#{client.secret}")
         }
         super
       end
