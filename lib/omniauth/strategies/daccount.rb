@@ -91,7 +91,7 @@ module OmniAuth
         params[:headers] = {
           "Host" => full_host,
           "Authorization" => "Basic #{Base64.encode64(base64str)}",
-          "Content-Length" => content_length,
+          "Content-Length" => "#{content_length}",
         }
         p "Params: #{params}"
         # {'grant_type' => 'authorization_code', 'code' => varifier}.merge(params)
