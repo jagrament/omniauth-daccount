@@ -76,7 +76,7 @@ module OmniAuth
 
     protected
       def build_access_token
-
+        verifier = request.params["code"]
         conn = Faraday.new(url: options.client_options.token_url) do |faraday|
           faraday.request  :url_encoded             # form-encode POST params
           faraday.response :logger, ::Logger.new($stdout), bodies: true if ENV['OAUTH_DEBUG'] == 'true'
