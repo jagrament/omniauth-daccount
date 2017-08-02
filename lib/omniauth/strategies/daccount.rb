@@ -54,6 +54,7 @@ module OmniAuth
           provider: "daccount",
           sub: raw_info['sub'],
           iss: raw_info['iss'],
+          name: raw_info['aud'],
         }
       end
 
