@@ -95,6 +95,7 @@ module OmniAuth
             code: verifier,
             redirect_uri: callback_url,
           }
+        end
         p response
       end
       # def build_access_token
