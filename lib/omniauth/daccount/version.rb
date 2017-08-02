@@ -1,5 +1,5 @@
 module OmniAuth
   module Daccount
-    VERSION = "0.2.7.7"
+    VERSION = "0.2.7.8"
   end
 end

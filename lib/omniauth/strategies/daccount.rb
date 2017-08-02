@@ -20,6 +20,10 @@ module OmniAuth
              token_url: 'https://conf.uw.docomo.ne.jp/token',
            }
 
+      def client
+       ::OmniAuth::Oauth2::Client.new(options.client_id, options.client_secret, deep_symbolize(options.client_options))
+      end
+
 
       def request_phase
         options.client_options[:headers] = {
@@ -71,7 +75,7 @@ module OmniAuth
           'Host' => full_host,
         })
         p access_token
-        @raw_info ||= access_token.get('userinfo',).parsed
+        @raw_info ||= access_token.get('userinfo').parsed
         p @raw_info
       end
 
@@ -80,6 +84,9 @@ module OmniAuth
       def build_access_token
         verifier = request.params["code"]
         params = {:redirect_uri => callback_url}.merge(token_params.to_hash)
+
+        content = {"client_id"=>"d00_0024_0001_04", "client_secret"=>"wWdmX8qFLEb3ZpXcAMKwDxjNcMFUqLjT", "grant_type"=>"authorization_code", "code"=>verifier,}
+Authenticator.new(id, secret, options[:auth_scheme]).apply(params)
         p "Params: #{params}"
         base64str = "#{options.client_id}:#{options.client_secret}"
         params[:headers] = {
