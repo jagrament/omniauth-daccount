@@ -41,10 +41,6 @@ module OmniAuth
       end
 
       def token_params
-        options.token_params[:headers] = {
-          "Host" => full_host,
-          "Authorization" => Base64.encode64("#{options.client_id}:#{options.client_secret}")
-        }
         super
       end
 
@@ -84,7 +80,13 @@ module OmniAuth
       def build_access_token
         p '====================='
         verifier = request.params["code"]
-        client.auth_code.get_token(verifier, {:redirect_uri => callback_url}.merge(token_params.to_hash), deep_symbolize(options.auth_token_params))
+        params = {:redirect_uri => callback_url}.merge(token_params.to_hash)
+        params[:headers] = {
+          "Host" => full_host,
+          "Authorization" => Base64.encode64("#{options.client_id}:#{options.client_secret}")
+        }
+
+        client.auth_code.get_token(verifier, params, deep_symbolize(options.auth_token_params))
       end
 
     end
