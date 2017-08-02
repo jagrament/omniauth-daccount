@@ -64,12 +64,10 @@ module OmniAuth
       end
 
       def raw_info
-        p "access_token: #{access_token}"
-        access_token.options[:mode] = :query
-        access_token.options[:headers].merge({
-          'Content-Type' => 'application/x-www-form-urlencoded',
-          'Host' => full_host,
-        }) if access_token.options[:headers].kind_of?(Hash)
+        p "access_token.token: #{access_token.options}"
+        p "access_token.params: #{access_token.params}"
+        p "access_token.options: #{access_token.options}"
+        access_token.options[:mode] = :header
         @raw_info ||= access_token.get('userinfo').parsed
         p @raw_info
       end
