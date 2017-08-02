@@ -84,6 +84,7 @@ module OmniAuth
         params[:headers] = {
           "Host" => full_host,
           "Authorization" => "Basic #{Base64.encode64(base64str)}"
+          "Content-Length" => params[:body].length
         }
 
         client.auth_code.get_token(verifier, params, deep_symbolize(options.auth_token_params))
