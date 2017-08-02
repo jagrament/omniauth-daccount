@@ -47,8 +47,6 @@ module OmniAuth
           "Authorization" => Base64.encode64("#{options.client_id}:#{options.client_secret}")
         }
         super
-        p options
-        p "params: #{{:redirect_uri => callback_url}.merge(token_params.to_hash(:symbolize_keys => true))}"
       end
 
       def callback_phase
