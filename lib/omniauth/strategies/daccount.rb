@@ -84,7 +84,7 @@ module OmniAuth
       def build_access_token
         p '====================='
         verifier = request.params["code"]
-        client.auth_code.get_token(verifier, {:redirect_uri => callback_url}.merge(token_params.to_hash, deep_symbolize(options.auth_token_params))
+        client.auth_code.get_token(verifier, {:redirect_uri => callback_url}.merge(token_params.to_hash), deep_symbolize(options.auth_token_params))
       end
 
     end
