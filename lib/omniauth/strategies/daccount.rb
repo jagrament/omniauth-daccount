@@ -20,6 +20,7 @@ module OmniAuth
              token_url: 'https://conf.uw.docomo.ne.jp/token/o/oauth2/auth',
            }
 
+
       def request_phase
         options.client_options[:headers] = {
           "Content-Type" => "application/x-www-form-urlencoded",
@@ -39,6 +40,18 @@ module OmniAuth
         end
       end
 
+      def token_params
+        options.token_options[:headers] = {
+          "Content-Type" => "application/x-www-form-urlencoded",
+          "Host" => full_host,
+          "Authorization" => Base64.encode64("#{@client.id}:#{@client.secret}")
+        }
+        super
+      end
+
+      def callback_phase
+        super
+      end
 
       uid { raw_info['sub'] }
 
@@ -62,7 +75,9 @@ module OmniAuth
           'Content-Type' => 'application/x-www-form-urlencoded',
           'Host' => full_host,
         })
-        @raw_info ||= access_token.get('userinfo').parsed
+        p access_token
+        @raw_info ||= access_token.get('userinfo',).parsed
+        p @raw_info
       end
 
     end
