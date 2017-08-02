@@ -20,11 +20,6 @@ module OmniAuth
              token_url: 'https://conf.uw.docomo.ne.jp/token',
            }
 
-      def client
-       ::OmniAuth::OAuth2::Client.new(options.client_id, options.client_secret, deep_symbolize(options.client_options))
-      end
-
-
       def request_phase
         options.client_options[:headers] = {
           "Content-Type" => "application/x-www-form-urlencoded",
@@ -83,15 +78,20 @@ module OmniAuth
 
       def build_access_token
         verifier = request.params["code"]
-        params = {:redirect_uri => callback_url}.merge(token_params.to_hash)
-
-        content = {"client_id"=>"d00_0024_0001_04", "client_secret"=>"wWdmX8qFLEb3ZpXcAMKwDxjNcMFUqLjT", "grant_type"=>"authorization_code", "code"=>verifier,}
-Authenticator.new(id, secret, options[:auth_scheme]).apply(params)
-        p "Params: #{params}"
+        params = {"redirect_uri" => callback_url}.merge(token_params.to_hash)
+        content_length = {
+          "client_id"=> options.client_id,
+          "client_secret"=> options.client_secret,
+          "grant_type"=>"authorization_code",
+          "code"=>verifier,
+          "redirect_uri" => callback_url,
+        }.to_query.length
+        p "Content-Length: #{content_length}"
         base64str = "#{options.client_id}:#{options.client_secret}"
         params[:headers] = {
           "Host" => full_host,
           "Authorization" => "Basic #{Base64.encode64(base64str)}",
+          "Content-Length" => content_length,
         }
         p "Params: #{params}"
         # {'grant_type' => 'authorization_code', 'code' => varifier}.merge(params)
