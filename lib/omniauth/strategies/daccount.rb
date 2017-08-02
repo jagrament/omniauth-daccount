@@ -21,7 +21,7 @@ module OmniAuth
            }
 
       def client
-       ::OmniAuth::Oauth2::Client.new(options.client_id, options.client_secret, deep_symbolize(options.client_options))
+       ::OmniAuth::OAuth2::Client.new(options.client_id, options.client_secret, deep_symbolize(options.client_options))
       end
 
 

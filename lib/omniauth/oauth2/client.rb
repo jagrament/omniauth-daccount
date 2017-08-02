@@ -1,7 +1,7 @@
 require "oauth2"
 
 module OmniAuth
-  module Oauth2
+  module OAuth2
     class Client < OAuth2::Client
       def get_token(params, access_token_opts = {}, access_token_class = AccessToken) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
         params = Authenticator.new(id, secret, options[:auth_scheme]).apply(params)
