@@ -50,13 +50,11 @@ module OmniAuth
       uid { raw_info['sub'] }
 
       info do
-        prune!(
+        {
           provider: "daccount",
           sub: raw_info['sub'],
           iss: raw_info['iss'],
-          name: raw_info['name'],
-          picture: raw_info['picture'],
-        )
+        }
       end
 
       extra do
@@ -64,12 +62,8 @@ module OmniAuth
       end
 
       def raw_info
-        p "access_token.token: #{access_token.options}"
-        p "access_token.params: #{access_token.params}"
-        p "access_token.options: #{access_token.options}"
         access_token.options[:mode] = :header
         @raw_info ||= access_token.get('/userinfo').parsed
-        p @raw_info
       end
 
       def callback_url
@@ -77,29 +71,6 @@ module OmniAuth
       end
 
     protected
-      # def build_access_token
-      #   verifier = request.params["code"]
-      #   conn = Faraday.new(url: options.client_options.token_url) do |faraday|
-      #     faraday.request  :url_encoded             # form-encode POST params
-      #     faraday.response :logger, ::Logger.new($stdout), bodies: true if ENV['OAUTH_DEBUG'] == 'true'
-      #     faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
-      #   end
-      #
-      #   base64str = "#{options.client_id}:#{options.client_secret}"
-      #   response = conn.post do |req|
-      #     req.url '/token'
-      #     # req.headers['Host'] =  full_host
-      #     req.headers['Authorization'] = "Basic #{Base64.strict_encode64(base64str)}"
-      #     req.body = {
-      #       client_id: options.client_id,
-      #       client_secret: options.client_secret,
-      #       grant_type: "authorization_code",
-      #       code: verifier,
-      #       redirect_uri: callback_url,
-      #     }
-      #   end
-      #   p response
-      # end
       def build_access_token
         verifier = request.params["code"]
         params = {redirect_uri: callback_url}.merge(token_params.to_hash)
