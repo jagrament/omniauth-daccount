@@ -82,10 +82,6 @@ module OmniAuth
         p @raw_info
       end
 
-      def build_access_token
-        verifier = request.params["code"]
-        client.auth_code.get_token(verifier, , deep_symbolize(options.auth_token_params))
-      end
     end
   end
 end
