@@ -79,39 +79,38 @@ module OmniAuth
       end
 
     protected
-      def build_access_token
-        verifier = request.params["code"]
-        conn = Faraday.new(url: options.client_options.token_url) do |faraday|
-          faraday.request  :url_encoded             # form-encode POST params
-          faraday.response :logger, ::Logger.new($stdout), bodies: true if ENV['OAUTH_DEBUG'] == 'true'
-          faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
-        end
-
-        base64str = "#{options.client_id}:#{options.client_secret}"
-        response = conn.post do |req|
-          req.url '/token'
-          # req.headers['Host'] =  full_host
-          req.headers['Authorization'] = "Basic #{Base64.strict_encode64(base64str)}"
-          req.body = {
-            client_id: options.client_id,
-            client_secret: options.client_secret,
-            grant_type: "authorization_code",
-            code: verifier,
-            redirect_uri: callback_url,
-          }
-        end
-        p response
-      end
       # def build_access_token
       #   verifier = request.params["code"]
-      #   params = {redirect_uri: callback_url}.merge(token_params.to_hash)
+      #   conn = Faraday.new(url: options.client_options.token_url) do |faraday|
+      #     faraday.request  :url_encoded             # form-encode POST params
+      #     faraday.response :logger, ::Logger.new($stdout), bodies: true if ENV['OAUTH_DEBUG'] == 'true'
+      #     faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
+      #   end
+      #
       #   base64str = "#{options.client_id}:#{options.client_secret}"
-      #   params[:headers] = {
-      #     "Host" => full_host,
-      #     "Authorization" => "Basic #{Base64.strict_encode64(base64str)}",
-      #   }
-      #   client.auth_code.get_token(verifier, params, deep_symbolize(options.auth_token_params))
+      #   response = conn.post do |req|
+      #     req.url '/token'
+      #     # req.headers['Host'] =  full_host
+      #     req.headers['Authorization'] = "Basic #{Base64.strict_encode64(base64str)}"
+      #     req.body = {
+      #       client_id: options.client_id,
+      #       client_secret: options.client_secret,
+      #       grant_type: "authorization_code",
+      #       code: verifier,
+      #       redirect_uri: callback_url,
+      #     }
+      #   end
+      #   p response
       # end
+      def build_access_token
+        verifier = request.params["code"]
+        params = {redirect_uri: callback_url}.merge(token_params.to_hash)
+        base64str = "#{options.client_id}:#{options.client_secret}"
+        params[:headers] = {
+          "Authorization" => "Basic #{Base64.strict_encode64(base64str)}",
+        }
+        client.auth_code.get_token(verifier, params, deep_symbolize(options.auth_token_params))
+      end
 
     end
   end
