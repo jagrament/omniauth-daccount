@@ -42,7 +42,6 @@ module OmniAuth
 
       def token_params
         options.token_params[:headers] = {
-          "Content-Type" => "application/x-www-form-urlencoded",
           "Host" => full_host,
           "Authorization" => Base64.encode64("#{options.client_id}:#{options.client_secret}")
         }
@@ -78,6 +77,14 @@ module OmniAuth
         p access_token
         @raw_info ||= access_token.get('userinfo',).parsed
         p @raw_info
+      end
+
+    protected
+
+      def build_access_token
+        p '====================='
+        verifier = request.params["code"]
+        client.auth_code.get_token(verifier, {:redirect_uri => callback_url}.merge(token_params.to_hash, deep_symbolize(options.auth_token_params))
       end
 
     end
