@@ -85,7 +85,7 @@ module OmniAuth
 
         base64str = "#{options.client_id}:#{options.client_secret}"
         response = conn.post do |req|
-          req.url '/auth'
+          req.url '/token'
           # req.headers['Host'] =  full_host
           req.headers['Authorization'] = "Basic #{Base64.strict_encode64(base64str)}"
           req.body = {
