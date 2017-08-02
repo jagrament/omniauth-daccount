@@ -68,7 +68,7 @@ module OmniAuth
         p "access_token.params: #{access_token.params}"
         p "access_token.options: #{access_token.options}"
         access_token.options[:mode] = :header
-        @raw_info ||= access_token.get('userinfo').parsed
+        @raw_info ||= access_token.get('/userinfo').parsed
         p @raw_info
       end
 
