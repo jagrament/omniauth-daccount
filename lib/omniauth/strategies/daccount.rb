@@ -17,7 +17,7 @@ module OmniAuth
       option :client_options, {#authorizationリクエスト時の追加パラメータ
              site: 'https://conf.uw.docomo.ne.jp',
              authorize_url: 'https://id.smt.docomo.ne.jp/cgi8/oidc/authorize',
-             token_url: 'https://conf.uw.docomo.ne.jp/token',
+             token_url: 'https://conf.uw.docomo.ne.jp/common/token',
            }
 
       def request_phase
