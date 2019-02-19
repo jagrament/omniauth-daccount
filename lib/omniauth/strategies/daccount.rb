@@ -64,7 +64,7 @@ module OmniAuth
 
       def raw_info
         access_token.options[:mode] = :header
-        @raw_info ||= access_token.get('/userinfo').parsed
+        @raw_info ||= access_token.get('/common/userinfo').parsed
       end
 
       def callback_url
