@@ -7,7 +7,12 @@ require 'uri'
 module OmniAuth
   module Strategies
     class Daccount < OmniAuth::Strategies::OAuth2
+      # required scope.
       BASE_SCOPES = "openid"
+      # 0: Authenticate with contract account only,
+      # 1: Authenticate with all account.
+      AUTH_IF = 1
+
       option :name, 'daccount'
       #authorizeにリクエストフォワードする時のapp側のパラメータ値にこれらを含めること。
       option :authorize_options, %i[nounce redirect_uri]
@@ -34,6 +39,7 @@ module OmniAuth
             params[k] = request.params[k.to_s] unless [nil, ''].include?(request.params[k.to_s])
           end
           params[:scope] = BASE_SCOPES
+          params[:authif] = AUTH_IF
           params[:nonce] = params[:state]
           session['omniauth.state'] = params[:state] if params[:state]
         end
