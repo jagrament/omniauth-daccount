@@ -9,18 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Koji Yamazaki"]
   spec.email         = ["kouji.yamazaki.cv@nttdocomo.com"]
 
-  spec.summary       = %q{d-account Oauth2 strategy for OmniAuth 1.x}
-  spec.description   = %q{d-account Oauth2 strategy for OmniAuth 1.x. This allows you to login to d-account with your ruby app}
-  spec.homepage      = ""
-
-  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
-  # to allow pushing to a single host or delete this section to allow pushing to any host.
-  if spec.respond_to?(:metadata)
-    spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
-  else
-    raise "RubyGems 2.0 or newer is required to protect against " \
-      "public gem pushes."
-  end
+  spec.summary       = %q{d-account Oauth2 strategy for OmniAuth.}
+  spec.description   = %q{d-account Oauth2 strategy for OmniAuth. This allows you to login to d-account with your ruby app}
+  spec.homepage      = "https://github.com/jagrament/omniauth-daccount"
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
