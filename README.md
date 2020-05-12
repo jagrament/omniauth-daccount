@@ -20,20 +20,24 @@ Or install it yourself as:
 
     $ gem install omniauth-daccount
 
+## Setup Your d-account API
+- Go to https://g.daccount.docomo.ne.jp/VIEW_OC01/login4
+- Sign in and Go to 'ＲＰサイト情報管理'
+- Create Your RP Site if you don't have, then you must provide the `openid` scope.
+- Go to '詳細', then note client_id and client_secret.
+
 ## Usage
 
-TODO: Write usage instructions here
+Here's an example for adding the middleware to a Rails app in config/initializers/omniauth.rb:
 
-## Development
+```
+Rails.application.config.middleware.use OmniAuth::Builder do
+  provider :daccount, ENV['D_ACCOUNT_CLIENT_ID'], ENV['D_ACCOUNT_CLIENT_SECRET'], callback_path: "your callback url"  
+end
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+Note: daccount connect cannot register http url as callback url. That is, localhost cannot be registered. Of course in most cases using localhosts while developing your application... but we need to prepare https callback url in this case(You can choise deploying heloku or using ngrok, and more).
 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/omniauth-daccount. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
-
-## Code of Conduct
-
-Everyone interacting in the Omniauth::Daccount project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/omniauth-daccount/blob/master/CODE_OF_CONDUCT.md).

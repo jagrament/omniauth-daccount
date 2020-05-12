@@ -6,8 +6,8 @@ require "omniauth/daccount/version"
 Gem::Specification.new do |spec|
   spec.name          = "omniauth-daccount"
   spec.version       = OmniAuth::Daccount::VERSION
-  spec.authors       = ["Koji Yamazaki"]
-  spec.email         = ["kouji.yamazaki.cv@nttdocomo.com"]
+  spec.authors       = ["jagrament"]
+  spec.email         = ["t10933ky@gmail.com"]
 
   spec.summary       = %q{d-account Oauth2 strategy for OmniAuth.}
   spec.description   = %q{d-account Oauth2 strategy for OmniAuth. This allows you to login to d-account with your ruby app}
@@ -21,8 +21,12 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.15"
-  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "rake", ">= 12.3.3"
   spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency "simplecov", "~> 0.18.5"
+  spec.add_development_dependency "rack-test", "~> 1.1.0"
+  spec.add_development_dependency "webmock", "~> 3.8.3"
+  spec.add_development_dependency "pry-byebug", "~> 3.9.0"
 
   spec.add_runtime_dependency 'omniauth', '>= 1.1.1'
   spec.add_runtime_dependency 'omniauth-oauth2', '>= 1.3.1'
