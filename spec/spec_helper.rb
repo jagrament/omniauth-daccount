@@ -8,6 +8,7 @@ require 'rack/test'
 require 'webmock/rspec'
 require 'omniauth'
 require "omniauth/daccount"
+require 'pry'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

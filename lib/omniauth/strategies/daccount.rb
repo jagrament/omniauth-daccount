@@ -14,12 +14,13 @@ module OmniAuth
       AUTH_IF = 1
 
       option :name, 'daccount'
-      #authorizeにリクエストフォワードする時のapp側のパラメータ値にこれらを含めること。
+      #Include parameters when request-forwarding to authorize.
       option :authorize_options, %i[nounce redirect_uri]
       option :verify_iss, true
       option :callback_path, '/login/docomo_callback'
 
-      option :client_options, {#authorizationリクエスト時の追加パラメータ
+      # Additional Parameters which requires when authorization requests.
+      option :client_options, {
              site: 'https://conf.uw.docomo.ne.jp',
              authorize_url: 'https://id.smt.docomo.ne.jp/cgi8/oidc/authorize',
              token_url: 'https://conf.uw.docomo.ne.jp/common/token',
