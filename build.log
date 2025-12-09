@@ -1,18 +1,22 @@
-/Users/koji.yamazaki/.rbenv/versions/3.4.4/lib/ruby/gems/3.4.0/gems/pry-0.13.1/lib/pry/plugins.rb:3: warning: ostruct was loaded from the standard library, but will no longer be part of the default gems starting from Ruby 3.5.0.
-You can add ostruct to your Gemfile or gemspec to silence this warning.
 
-An error occurred while loading ./spec/omniauth/daccount_spec.rb.
-Failure/Error: require 'pry'
+OmniAuth::Daccount
+  client options
+    should have correct site
+    should have correct authorize url
+    should have correct token url
+    should be overrideable
+      for site
+      for authorize url
+      for token url
+  #raw_info
+    should use relative paths
+  #info.urls
+    should use html_url from raw_info
+  #callback_url
+    is a combination of host, script name, and callback path
 
-NameError:
-  undefined method '=~' for class 'Pry::Code'
-# ./spec/spec_helper.rb:11:in '<top (required)>'
-# ./spec/omniauth/daccount_spec.rb:1:in '<top (required)>'
-No examples found.
-
-Finished in 0.0001 seconds (files took 4.05 seconds to load)
-0 examples, 0 failures, 1 error occurred outside of examples
+Finished in 0.11107 seconds (files took 1.35 seconds to load)
+9 examples, 0 failures
 
 Coverage report generated for RSpec to /Users/koji.yamazaki/workspace/omniauth-daccount/coverage.
-Line Coverage: 56.25% (27 / 48)
-SimpleCov failed with exit 1
+Line Coverage: 64.58% (31 / 48)
