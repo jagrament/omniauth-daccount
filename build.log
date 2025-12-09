@@ -1,0 +1,22 @@
+
+OmniAuth::Daccount
+  client options
+    should have correct site
+    should have correct authorize url
+    should have correct token url
+    should be overrideable
+      for site
+      for authorize url
+      for token url
+  #raw_info
+    should use relative paths
+  #info.urls
+    should use html_url from raw_info
+  #callback_url
+    is a combination of host, script name, and callback path
+
+Finished in 0.05532 seconds (files took 3.86 seconds to load)
+9 examples, 0 failures
+
+Coverage report generated for RSpec to /Users/koji.yamazaki/workspace/omniauth-daccount/coverage.
+Line Coverage: 64.58% (31 / 48)

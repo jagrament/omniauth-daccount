@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 require "omniauth/daccount/version"
-require 'multi_json'
 require 'omniauth/strategies/oauth2'
 require 'uri'
 
