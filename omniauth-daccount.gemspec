@@ -31,6 +31,6 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'omniauth', '>= 2.0'
   spec.add_runtime_dependency 'omniauth-oauth2', '>= 1.8'
-  spec.add_runtime_dependency 'multi_json', '~> 1.3'
+  spec.add_runtime_dependency 'multi_json', '~> 1.15'
 
 end
