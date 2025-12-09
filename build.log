@@ -15,7 +15,7 @@ OmniAuth::Daccount
   #callback_url
     is a combination of host, script name, and callback path
 
-Finished in 0.11107 seconds (files took 1.35 seconds to load)
+Finished in 0.01049 seconds (files took 0.4843 seconds to load)
 9 examples, 0 failures
 
 Coverage report generated for RSpec to /Users/koji.yamazaki/workspace/omniauth-daccount/coverage.
